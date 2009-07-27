@@ -8,14 +8,14 @@ class StorageTest < Test::Unit::TestCase
       Rubyprot.configure do |config|
         Rubyprot.dump_path = "test/test_files/test_data"
         #change these values to run the tests
-        #config.s3_bucket_name = "YOUR_BUCKET"
-        #config.s3_access_key_id = "YOUR_KEY"
-        #config.s3_secret_access_key = "YOUR_SECRET"
+        #config.amazon_bucket_name = "YOUR_BUCKET"
+        #config.amazon_access_key_id = "YOUR_KEY"
+        #config.amazon_secret_access_key = "YOUR_SECRET"
       end
 
     end
     
-    if Rubyprot.s3_bucket_name && Rubyprot.s3_access_key_id && Rubyprot.s3_secret_access_key
+    if Rubyprot.amazon_bucket_name && Rubyprot.amazon_access_key_id && Rubyprot.amazon_secret_access_key
 
       should "should upload file to amazon and return true" do
         assert_nothing_raised do
