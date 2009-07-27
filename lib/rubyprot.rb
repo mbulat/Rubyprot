@@ -17,29 +17,29 @@ module Rubyprot
     # top level path where temporary files will be placed
     attr_accessor :dump_path
     # amazon s3 bucket for file storage
-    attr_accessor :s3_bucket_name
+    attr_accessor :amazon_bucket_name
     # amazon access key
-    attr_accessor :s3_access_key_id
+    attr_accessor :amazon_access_key_id
     # amazon secret key
-    attr_accessor :s3_secret_access_key  
+    attr_accessor :amazon_secret_access_key  
     
     #Allows block configuration of Rubyprot attributes
     #
     #   Rubyprot.configure do |config|
     #     config.dump_path = "my_folder/my_path"
-    #     config.s3_bucket_name = "my_bucket"
-    #     config.s3_access_key_id = "my_key"
-    #     config.s3_secret_access_key = "my_access_key"
+    #     config.amazon_bucket_name = "my_bucket"
+    #     config.amazon_access_key_id = "my_key"
+    #     config.amazon_secret_access_key = "my_access_key"
     #   end    
     def configure
       yield self
     end
     
-    # Marshals any object into a file and stores 
+    # Marshals any object into a file named after the object class and stores 
     # the file in the folder specified by the +dump_path+ attribute.
     # Returns a closed file handler.
     #
-    #   >>  Rubyprot.serialize(object)
+    #   >> Rubyprot.serialize(object)
     #   => #<File:dump_path/serializer/Object (closed)>
     def serialize(object)
       return Rubyprot::Serializer.serialize(object)
@@ -49,24 +49,24 @@ module Rubyprot
     # by the +dump_path+ attribute. 
     # Returns the object.
     #
-    #   >>  Rubyprot.deserialize(object)
-    #     
+    #   >> Rubyprot.deserialize("Object")
+    #   => #<Object:0x18a30d0>
     def deserialize(name)
       return Rubyprot::Deserializer.deserialize(name)
     end
 
-    # Downloads file from amazon to dump folder. 
+    # Downloads file from amazon using
+    # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
+    # attributes to +dump_path+. 
     #
-    #
-    # 
     def aws_download(location, name)
       return Rubyprot::Storage.aws_download(location, name)
     end
 
-    # Uploads file from amazon to dump folder. 
+    # Downloads file from amazon using
+    # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
+    # to given +location+ on s3.
     #
-    #
-    # 
     def aws_upload(location, name)
       return Rubyprot::Storage.aws_upload(location, name)
     end

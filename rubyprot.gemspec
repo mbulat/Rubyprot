@@ -22,13 +22,16 @@ Gem::Specification.new do |s|
      "lib/rubyprot.rb",
      "lib/rubyprot/deserializer.rb",
      "lib/rubyprot/serializer.rb",
+     "lib/rubyprot/storage.rb",
      "rubyprot.gemspec",
      "test/configuration_test.rb",
      "test/deserializer_test.rb",
      "test/serializer_test.rb",
+     "test/storage_test.rb",
      "test/test_files/models/test_class.rb",
      "test/test_files/models/test_class_two.rb",
      "test/test_files/models/test_module.rb",
+     "test/test_files/test_data/TestClass",
      "test/test_helper.rb"
   ]
   s.has_rdoc = true
