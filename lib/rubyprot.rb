@@ -10,6 +10,7 @@
 # 
 require 'rubyprot/serializer'
 require 'rubyprot/deserializer'
+require 'rubyprot/storage'
 
 module Rubyprot
   class << self
@@ -35,8 +36,8 @@ module Rubyprot
     end
     
     # Marshals any object into a file and stores 
-    # the file in the "serializer" folder under 
-    # the specified +dump_path+. Returns a closed file handler.
+    # the file in the folder specified by the +dump_path+ attribute.
+    # Returns a closed file handler.
     #
     #   >>  Rubyprot.serialize(object)
     #   => #<File:dump_path/serializer/Object (closed)>
@@ -44,11 +45,30 @@ module Rubyprot
       return Rubyprot::Serializer.serialize(object)
     end
 
-    # Unmarshals named file and returns the object. 
-    # The file must be located in the "deserializer" 
-    # folder in the specified dump_path.
+    # Unmarshals named file from the folder specified 
+    # by the +dump_path+ attribute. 
+    # Returns the object.
+    #
+    #   >>  Rubyprot.deserialize(object)
+    #     
     def deserialize(name)
       return Rubyprot::Deserializer.deserialize(name)
+    end
+
+    # Downloads file from amazon to dump folder. 
+    #
+    #
+    # 
+    def aws_download(location, name)
+      return Rubyprot::Storage.aws_download(location, name)
+    end
+
+    # Uploads file from amazon to dump folder. 
+    #
+    #
+    # 
+    def aws_upload(location, name)
+      return Rubyprot::Storage.aws_upload(location, name)
     end
     
     def dump_path=(value) #:nodoc: 
@@ -57,12 +77,6 @@ module Rubyprot
           unless File.directory?(value)
             FileUtils.mkdir(value)
           end      
-          unless File.directory?(value + '/serializer')
-            FileUtils.mkdir(value + '/serializer')
-          end
-          unless File.directory?(value + '/deserializer')
-            FileUtils.mkdir(value + '/deserializer')
-          end        
           if File.directory?(value)
             @dump_path = value
           end

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rubyprot}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bulat"]
@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
      "test/test_files/models/test_class.rb",
      "test/test_files/models/test_class_two.rb",
      "test/test_files/models/test_module.rb",
-     "test/test_files/test_data/deserializer/TestClass",
      "test/test_helper.rb"
   ]
   s.has_rdoc = true
@@ -42,6 +41,7 @@ Gem::Specification.new do |s|
     "test/configuration_test.rb",
      "test/deserializer_test.rb",
      "test/serializer_test.rb",
+     "test/storage_test.rb",
      "test/test_files/models/test_class.rb",
      "test/test_files/models/test_class_two.rb",
      "test/test_files/models/test_module.rb",
@@ -54,10 +54,13 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<aws-s3>, [">= 0.5.1"])
+      s.add_runtime_dependency(%q<mechanize>, [">= 0.8.5"])
     else
       s.add_dependency(%q<aws-s3>, [">= 0.5.1"])
+      s.add_dependency(%q<mechanize>, [">= 0.8.5"])
     end
   else
     s.add_dependency(%q<aws-s3>, [">= 0.5.1"])
+    s.add_dependency(%q<mechanize>, [">= 0.8.5"])
   end
 end

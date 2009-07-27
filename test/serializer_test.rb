@@ -4,6 +4,7 @@ class SerializerTest < Test::Unit::TestCase
   context "Rubyprot serializer" do
     setup do
       @test_file_path = "test/test_files/dump"
+      @object_name = "TestClass"
     end
     
     teardown do
@@ -29,7 +30,7 @@ class SerializerTest < Test::Unit::TestCase
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
-        file = File.open("test/test_files/dump/serializer/TestClass")
+        file = File.open(@test_file_path + "/" + @object_name)
       end
       
       FileUtils.rmtree(Rubyprot.dump_path)
@@ -44,7 +45,7 @@ class SerializerTest < Test::Unit::TestCase
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
-        file = File.open("test/test_files/dump/serializer/TestClass")
+        file = File.open(@test_file_path + "/" + @object_name)
         new_object = Marshal.load(file)
         file.close
 

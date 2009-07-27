@@ -1,14 +1,10 @@
 module Rubyprot
   class Deserializer #:nodoc:
-    def self.deserialize(file)
-      if file.closed? 
-        f = File.open(file.path, 'r')
-        object = Marshal.load(f)
-        f.close
-        return object 
-      else
-        object = Marshal.load(file)
-        return object
+    def self.deserialize(name)
+      raise "dump_path attribute must be set" unless Rubyprot.dump_path
+      
+      File.open(Rubyprot.dump_path + "/" + name) do |f|
+        Marshal.load(f)
       end
     end
   end
