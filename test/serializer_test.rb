@@ -4,14 +4,28 @@ class SerializerTest < Test::Unit::TestCase
   context "Rubyprot serializer" do
     setup do
       @test_file_path = "test/test_files/dump"
-      Rubyprot.configure do |config|
-        Rubyprot.dump_path = @test_file_path
+    end
+    
+    teardown do
+      unless Rubyprot.dump_path.nil?
+        FileUtils.rmtree(Rubyprot.dump_path)
+        Rubyprot.dump_path = nil
+      end
+    end    
+    
+    should "raise error if dump path not set" do
+      assert_raise RuntimeError do
+        object = TestClass.new      
+        Rubyprot.serialize(object)
       end
     end
     
     should "create marshalled file from object" do
-      object = TestClass.new
+      Rubyprot.configure do |config|
+        Rubyprot.dump_path = @test_file_path
+      end
       
+      object = TestClass.new      
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
@@ -22,8 +36,11 @@ class SerializerTest < Test::Unit::TestCase
     end    
 
     should "have valid marshaled file" do
-      object = TestClass.new
+      Rubyprot.configure do |config|
+        Rubyprot.dump_path = @test_file_path
+      end
       
+      object = TestClass.new
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
@@ -37,8 +54,19 @@ class SerializerTest < Test::Unit::TestCase
         end
         assert_equal new_object.test_attr, 'hello world'
       end
+    end
+    
+    should "return a file object" do
+      Rubyprot.configure do |config|
+        Rubyprot.dump_path = @test_file_path
+      end
       
-      FileUtils.rmtree(Rubyprot.dump_path)
+      object = TestClass.new
+      f = Rubyprot.serialize(object)
+      
+      assert_kind_of File, f
     end
   end
+  
+
 end

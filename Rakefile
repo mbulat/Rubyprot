@@ -9,6 +9,7 @@ begin
     gem.email = "mbulat@facesmedia.com"
     gem.homepage = "http://github.com/mbulat/rubyprot"
     gem.authors = ["Michael Bulat"]
+    gem.add_dependency('aws-s3', '>= 0.5.1')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 
