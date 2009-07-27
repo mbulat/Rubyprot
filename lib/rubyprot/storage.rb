@@ -13,12 +13,14 @@ module Rubyprot
           :secret_access_key => Rubyprot.amazon_secret_access_key
         )
       
-        marshalled_data = AWS::S3::S3Object.find location + name, Rubyprot.amazon_bucket_name
+        marshalled_data = AWS::S3::S3Object.find location + "/" + name, Rubyprot.amazon_bucket_name
         url = URI.parse(marshalled_data.url)
       
         agent = WWW::Mechanize.new
         marshalled_file = agent.get(url)
         marshalled_file.save_as(Rubyprot.dump_path + '/' + name)
+        
+        name
     end
 
     def self.aws_upload(location, name)
@@ -33,7 +35,7 @@ module Rubyprot
       
       file = File.open(Rubyprot.dump_path + "/" + name)
       
-      AWS::S3::S3Object.store(location + name, 
+      AWS::S3::S3Object.store(location + "/" + name, 
                               file, 
                               Rubyprot.amazon_bucket_name,
                               :cache_control => "no-store, no-cache, must-revalidate, post-check=0, pre-check=0")

@@ -67,6 +67,21 @@ class SerializerTest < Test::Unit::TestCase
       
       assert_kind_of String, name
     end
+
+    should "return array string name for array" do
+      Rubyprot.configure do |config|
+        Rubyprot.dump_path = @test_file_path
+      end
+      
+      array = Array.new
+      object = TestClass.new
+      array[0] = object
+      array[1] = object
+      
+      name = Rubyprot.serialize(array)
+      
+      assert_kind_of String, name
+    end
   end
   
 

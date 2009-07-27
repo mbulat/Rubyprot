@@ -40,7 +40,7 @@ module Rubyprot
     # Returns the name of the file.
     #
     #   >> Rubyprot.serialize(object)
-    #   => #<File:dump_path/serializer/Object (closed)>
+    #   => "Object"
     def serialize(object)
       return Rubyprot::Serializer.serialize(object)
     end
@@ -55,10 +55,13 @@ module Rubyprot
       return Rubyprot::Deserializer.deserialize(name)
     end
 
-    # Downloads file from amazon using
+    # Downloads file from amazon 
     # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
     # attributes to +dump_path+. 
     #
+    # Returns the file name for use to deserialize object
+    #
+    #   Rubyprot.deserialize(Rubyprot.aws_download("path_to_data", "Object"))
     def aws_download(location, name)
       return Rubyprot::Storage.aws_download(location, name)
     end
@@ -67,6 +70,9 @@ module Rubyprot
     # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
     # to given +location+ on s3.
     #
+    # Returns HTTP status
+    #
+    #    Rubyprot.aws_upload("path_to_data", Rubyprot.serialize(conversations)) 
     def aws_upload(location, name)
       return Rubyprot::Storage.aws_upload(location, name)
     end
