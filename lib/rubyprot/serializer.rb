@@ -6,7 +6,7 @@
 #  Copyright 2009 Michael Bulat. All rights reserved.
 # 
 module Rubyprot
-  class Serializer
+  class Serializer #:nodoc:
     def self.serialize(object)
       file = File.new(Rubyprot.dump_path + "/serializer/" + object.class.name, "w")
       file.write(Marshal.dump(object))

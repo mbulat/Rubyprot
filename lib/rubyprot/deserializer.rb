@@ -6,7 +6,7 @@
 #  Copyright 2009 Michael Bulat. All rights reserved.
 # 
 module Rubyprot
-  class Deserializer
+  class Deserializer #:nodoc:
     def self.deserialize(name)
       File.open(Rubyprot.dump_path + "/deserializer/" + name) do |f|
         Marshal.load(f)

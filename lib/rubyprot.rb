@@ -17,14 +17,21 @@ module Rubyprot
     attr_accessor :s3_access_key_id
     attr_accessor :s3_secret_access_key  
     
+    #allows block configuration of Rubyprot attributes
     def configure
       yield self
     end
     
+    #Marshals any object into a file and stores 
+    #the file in the "serializer" folder under 
+    #the specified dump_path.
     def serialize(object)
       return Rubyprot::Serializer.serialize(object)
     end
 
+    #Unmarshals named file and returns the object. 
+    #The file must be located in the "deserializer" 
+    #folder in the specified dump_path.
     def deserialize(name)
       return Rubyprot::Deserializer.deserialize(name)
     end
