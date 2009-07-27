@@ -1,0 +1,3 @@
+class TestClassTwo < TestClass
+
+end

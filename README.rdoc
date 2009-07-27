@@ -1,0 +1,7 @@
+= rubyprot
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 Michael Bulat. See LICENSE for details.
