@@ -57,15 +57,15 @@ class SerializerTest < Test::Unit::TestCase
       end
     end
     
-    should "return a file object" do
+    should "return a string name" do
       Rubyprot.configure do |config|
         Rubyprot.dump_path = @test_file_path
       end
       
       object = TestClass.new
-      f = Rubyprot.serialize(object)
+      name = Rubyprot.serialize(object)
       
-      assert_kind_of File, f
+      assert_kind_of String, name
     end
   end
   

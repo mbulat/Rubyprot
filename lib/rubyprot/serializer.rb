@@ -7,7 +7,7 @@ module Rubyprot
       file.write(Marshal.dump(object))
       file.close    
       
-      file  
+      object.class.name
     end
   end
 end
