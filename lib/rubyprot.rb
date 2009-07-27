@@ -36,9 +36,10 @@ module Rubyprot
     
     # Marshals any object into a file and stores 
     # the file in the "serializer" folder under 
-    # the specified +dump_path+. Returns a file object.
+    # the specified +dump_path+. Returns a closed file handler.
     #
-    #   Rubyprot.serialize(object)
+    #   >>  Rubyprot.serialize(object)
+    #   => #<File:dump_path/serializer/Object (closed)>
     def serialize(object)
       return Rubyprot::Serializer.serialize(object)
     end

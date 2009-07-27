@@ -1,6 +1,13 @@
 = rubyprot
 
-Description goes here.
+Simple library to aid in object serialization and messaging via Rubys Marshal
+
+== An Overview
+
+Rubyprot helps with the task of using Ruby's marshal utility to package objects into binary format for storage and messaging. Marshal's speed and simplicity make it perfect for Ruby centric applications that require disconnected object sharing.
+
+Rubyprot currently allows for the utilization of Amazon's S3 servers for storage and retrieval of marshaled data.
+
 
 == Copyright
 

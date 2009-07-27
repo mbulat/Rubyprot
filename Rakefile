@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "rubyprot"
-    gem.summary = %Q{TODO}
+    gem.summary = "Simple library to aid in object serialization and messaging via Rubys Marshal"
     gem.email = "mbulat@facesmedia.com"
     gem.homepage = "http://github.com/mbulat/rubyprot"
     gem.authors = ["Michael Bulat"]
