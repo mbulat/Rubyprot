@@ -8,6 +8,9 @@ Rubyprot helps with the task of using Ruby's marshal utility to package objects 
 
 Rubyprot currently allows for the utilization of Amazon's S3 servers for storage and retrieval of marshaled data.
 
+== Documentation
+http://rdoc.info/projects/mbulat/rubyprot
+
 
 == Copyright
 
