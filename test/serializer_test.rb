@@ -4,7 +4,8 @@ class SerializerTest < Test::Unit::TestCase
   context "Rubyprot serializer" do
     setup do
       @test_file_path = "test/test_files/dump"
-      @object_name = "TestClass"
+      @object_name = "Person"
+      @object_name_ends_in_s = "TestClass"
     end
     
     teardown do
@@ -16,7 +17,7 @@ class SerializerTest < Test::Unit::TestCase
     
     should "raise error if dump path not set" do
       assert_raise RuntimeError do
-        object = TestClass.new      
+        object = Person.new      
         Rubyprot.serialize(object)
       end
     end
@@ -26,7 +27,7 @@ class SerializerTest < Test::Unit::TestCase
         Rubyprot.dump_path = @test_file_path
       end
       
-      object = TestClass.new      
+      object = Person.new      
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
@@ -41,7 +42,7 @@ class SerializerTest < Test::Unit::TestCase
         Rubyprot.dump_path = @test_file_path
       end
       
-      object = TestClass.new
+      object = Person.new
       Rubyprot.serialize(object)
       
       assert_nothing_raised do
@@ -62,13 +63,29 @@ class SerializerTest < Test::Unit::TestCase
         Rubyprot.dump_path = @test_file_path
       end
       
-      object = TestClass.new
+      object = Person.new
       name = Rubyprot.serialize(object)
       
       assert_kind_of String, name
     end
 
-    should "return array string name for array" do
+    should "return string plural name for array" do
+      Rubyprot.configure do |config|
+        Rubyprot.dump_path = @test_file_path
+      end
+      
+      array = Array.new
+      object = Person.new
+      array[0] = object
+      array[1] = object
+      
+      name = Rubyprot.serialize(array)
+      
+      assert_kind_of String, name
+      assert name == "Persons"
+    end
+    
+    should "return string plural name for array from object ending in s" do
       Rubyprot.configure do |config|
         Rubyprot.dump_path = @test_file_path
       end
@@ -81,7 +98,8 @@ class SerializerTest < Test::Unit::TestCase
       name = Rubyprot.serialize(array)
       
       assert_kind_of String, name
-    end
+      assert name == "TestClasses"
+    end    
   end
   
 

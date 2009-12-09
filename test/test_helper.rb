@@ -8,6 +8,7 @@ require 'rubyprot'
 require 'test_files/models/test_class'
 require 'test_files/models/test_class_two'
 require 'test_files/models/test_module'
+require 'test_files/models/person'
 
 class Test::Unit::TestCase
 end
