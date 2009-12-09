@@ -66,7 +66,7 @@ module Rubyprot
       return Rubyprot::Storage.aws_download(location, name)
     end
 
-    # Downloads file from amazon using
+    # Uploads file from amazon
     # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
     # to given +location+ on s3.
     #
@@ -77,7 +77,7 @@ module Rubyprot
       return Rubyprot::Storage.aws_upload(location, name)
     end
 
-    # Deletes file from amazon using
+    # Deletes file from amazon
     # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
     # from given +location+ on s3.
     #
