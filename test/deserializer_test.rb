@@ -11,7 +11,7 @@ class DeserializerTest < Test::Unit::TestCase
 
     end
     
-    should "should unmarshal file by name into working object" do
+    should "unmarshal file by name into working object" do
       
       assert_nothing_raised do
         my_object = Rubyprot.deserialize(@object_name)

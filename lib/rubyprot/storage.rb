@@ -41,6 +41,20 @@ module Rubyprot
                               :cache_control => "no-store, no-cache, must-revalidate, post-check=0, pre-check=0")
     end
     
+    def self.aws_delete(location, name)
+      raise "amazon_bucket_name attribute must be set" unless Rubyprot.amazon_bucket_name
+      raise "amazon_secret_access_key attribute must be set" unless Rubyprot.amazon_secret_access_key
+      raise "amazon_access_key_id attribute must be set" unless Rubyprot.amazon_access_key_id
+
+      AWS::S3::Base.establish_connection!(
+        :access_key_id     => Rubyprot.amazon_access_key_id,
+        :secret_access_key => Rubyprot.amazon_secret_access_key
+      )
+      
+      AWS::S3::S3Object.delete location + "/" + name, Rubyprot.amazon_bucket_name
+      
+    end    
+    
   end
 end
 

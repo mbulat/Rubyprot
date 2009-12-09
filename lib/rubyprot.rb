@@ -76,7 +76,18 @@ module Rubyprot
     def aws_upload(location, name)
       return Rubyprot::Storage.aws_upload(location, name)
     end
-    
+
+    # Deletes file from amazon using
+    # using +amazon_bucket_name+, +amazon_access_key_id+, +amazon_secret_access_key+
+    # from given +location+ on s3.
+    #
+    # Returns HTTP status
+    #
+    #    Rubyprot.aws_delete("path_to_data", "Object") 
+    def aws_delete(location, name)
+      return Rubyprot::Storage.aws_delete(location, name)
+    end
+
     def dump_path=(value) #:nodoc: 
       begin
         unless value.nil?
